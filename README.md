@@ -66,8 +66,9 @@ sudo apt install ros-humble-rmw-cyclonedds-cpp -y
   </Domain>
 </CycloneDDS>
 ```
-- `NetworkInterface name`에는 실제 사용하는 인터페이스 이름(`wlo1`, `wlan0`, `eth0` 등)을 적습니다. 
-- `<Peer address="..."/>`에는 통신에 참여하는 모든 장비의 IP를 나열합니다. 
+> `NetworkInterface name`에는 실제 사용하는 인터페이스 이름(`wlo1`, `wlan0`, `eth0` 등)을 적습니다. 
+
+> `<Peer address="..."/>`에는 통신에 참여하는 모든 장비의 IP를 나열합니다. 
 
 ---
 
@@ -102,7 +103,7 @@ ros2 run demo_nodes_cpp talker
 ```bash
 ros2 run demo_nodes_cpp listener
 ```
-- ROBOT 터미널에서 토픽 메시지(`Hello World: ...`)가 출력되면 CycloneDDS 기반 통신이 정상 작동하는 것 입니다.
+> ROBOT 터미널에서 토픽 메시지(`Hello World: ...`)가 출력되면 CycloneDDS 기반 통신이 정상 작동하는 것 입니다.
 
 ---
 
