@@ -1,0 +1,17 @@
+<CycloneDDS xmlns="https://cdds.io/config">
+ <Domain>
+   <General>
+     <Interfaces>
+       <NetworkInterface name="wlo1"/>
+     </Interfaces>
+   </General>
+
+
+   <Discovery>
+     <Peers>
+       <Peer address="192.168.30.XXX"/> <!-- PC IP-->
+       <Peer address="192.168.30.XXX"/> <!-- ROBOT IP-->
+     </Peers>
+   </Discovery>
+ </Domain>
+</CycloneDDS>
