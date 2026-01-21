@@ -11,13 +11,24 @@
 - Ubuntu 22.04에서 ROS 2 Humble이 설치되어 있어야 합니다. (`ros-humble-desktop` 또는 `ros-humble-ros-base`). 
 - 두 장비가 같은 서브넷의 네트워크에 연결되어 있어야 합니다. (예: 192.168.30.XXX 대역). 
 - 각 장비의 네트워크 인터페이스 이름과 IP 주소를 확인해 둡니다. 
-- 인터페이스 이름 확인 명령어:  
+- 인터페이스 이름 확인 명령어:
+<div align="center">
+<img width="754" height="506" alt="Screenshot from 2026-01-21 20-51-57" src="https://github.com/user-attachments/assets/268e4c79-9646-4a9c-9e2b-fdadb004b170" />
+</div>
+
 ```bash
 ip a
 ```
+<div align="center">
+<img width="754" height="506" alt="Screenshot from 2026-01-21 20-47-33" src="https://github.com/user-attachments/assets/f7dc26f3-b66b-459f-abc7-619ab7cf88a7" />
+</div>
+
 ```bash
 ifconfig
 ```
+> 네트워크 인터페이스 이름은 `wlo1`, `wlan0`, `eth0` 등이 있습니다. 
+
+> IP는 inet 뒤에 나열된 것 입니다. 
 
 ---
 
