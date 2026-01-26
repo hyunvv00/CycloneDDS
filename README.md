@@ -1,12 +1,17 @@
 # ROS 2 Humble + CycloneDDS 네트워크 설정 (PC ↔ ROBOT)
-이 저장소는 ROS 2 Humble 환경에서 CycloneDDS를 사용하여 두 장비(예: 노트북 PC와 로봇)를 같은 네트워크에서 통신하도록 설정하는 방법을 정리한 매뉴얼입니다. 
 > 대상 환경: Ubuntu 22.04 + ROS 2 Humble, 기본 RMW: Fast DDS → CycloneDDS로 교체 설정입니다.
 
 > (예시 인터페이스: `wlo1` (Wi‑Fi), 예시 IP: `192.168.30.109`(PC), `192.168.30.120`(ROBOT))
 
+이 저장소는 ROS 2 Humble 환경에서 CycloneDDS를 사용하여 두 장비(예: 노트북 PC와 로봇)를 같은 네트워크에서 통신하도록 설정하는 방법을 정리한 매뉴얼입니다. 
+
 ---
 
 ## 1. 사전 준비
+> 네트워크 인터페이스 이름은 `wlo1`, `wlan0`, `eth0` 등이 있습니다. 
+
+> IP는 inet 뒤에 나열된 것 입니다.
+
 두 장비 모두 다음 조건을 만족해야 합니다. 
 - Ubuntu 22.04에서 ROS 2 Humble이 설치되어 있어야 합니다. (`ros-humble-desktop` 또는 `ros-humble-ros-base`). 
 - 두 장비가 같은 서브넷의 네트워크에 연결되어 있어야 합니다. (예: 192.168.30.XXX 대역). 
@@ -26,9 +31,6 @@ ip a
 ```bash
 ifconfig
 ```
-> 네트워크 인터페이스 이름은 `wlo1`, `wlan0`, `eth0` 등이 있습니다. 
-
-> IP는 inet 뒤에 나열된 것 입니다. 
 
 ---
 
@@ -42,6 +44,10 @@ sudo apt install ros-humble-rmw-cyclonedds-cpp -y
 ---
 
 ## 3. CycloneDDS 설정 파일 작성
+> `NetworkInterface name`에는 실제 사용하는 인터페이스 이름(`wlo1`, `wlan0`, `eth0` 등)을 적습니다. 
+
+> `<Peer address="..."/>`에는 통신에 참여하는 모든 장비의 IP를 나열합니다.
+
 두 장비 모두 홈 디렉토리에 CycloneDDS 설정 파일을 생성합니다. 
 경로: `~/.config/cyclonedds.xml`
 ```xml
@@ -66,9 +72,6 @@ sudo apt install ros-humble-rmw-cyclonedds-cpp -y
   </Domain>
 </CycloneDDS>
 ```
-> `NetworkInterface name`에는 실제 사용하는 인터페이스 이름(`wlo1`, `wlan0`, `eth0` 등)을 적습니다. 
-
-> `<Peer address="..."/>`에는 통신에 참여하는 모든 장비의 IP를 나열합니다. 
 
 ---
 
@@ -88,6 +91,8 @@ source ~/.bashrc
 ## 5. 통신 테스트 방법
 두 장비에서 ROS 2 노드가 서로 보이는지 간단히 테스트할 수 있습니다. 
 ### 5.1 공통 준비
+> ROBOT 터미널에서 토픽 메시지(`Hello World: ...`)가 출력되면 CycloneDDS 기반 통신이 정상 작동하는 것 입니다.
+
 두 장비 모두에서:
 ```bash
 source /opt/ros/humble/setup.bash
@@ -103,7 +108,6 @@ ros2 run demo_nodes_cpp talker
 ```bash
 ros2 run demo_nodes_cpp listener
 ```
-> ROBOT 터미널에서 토픽 메시지(`Hello World: ...`)가 출력되면 CycloneDDS 기반 통신이 정상 작동하는 것 입니다.
 
 ---
 
